@@ -1,0 +1,8 @@
+.row
+  .span5
+    == partial "templates/form"
+  .span7
+    #preview
+      h3 = @template.name
+      pre class="brush: perl"
+        = @template.body

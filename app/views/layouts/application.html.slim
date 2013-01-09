@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title CodeBuilder
+    == stylesheet_link_tag "bootstrap", "bootstrap-responsive", "application"
+    == javascript_include_tag "jquery", "jquery-ujs", "bootstrap.min", "application"
+  body
+    .navbar.navbar-fixed-top.navbar-inverse
+      .navbar-inner
+        .container
+          a.brand href="/" CodeBuilder
+          ul.nav
+            li.active
+              a href="/" Home
+            li
+              a href="/templates/new" New Template
+            li
+              a href="/templates" Templates
+            li
+              a href="/codes/new" New Code
+            li
+              a href="/codes" Codes
+    .container
+      .content
+        .row
+          .span12
+        .row
+          == yield

@@ -1,0 +1,27 @@
+body {
+    padding-top: 60px;
+}
+
+@media (min-width: 1200px) {
+    .controls-row [class*="span"] + [class*="span"] {
+	margin-left: 10px;
+	margin-right: 10px;
+    }
+    input.span3,
+    textarea.span3,
+    .uneditable-input.span3 {
+	width: 226px;
+    }
+}
+
+@media (min-width: 980px) and (max-width: 1199px){
+    .controls-row [class*="span"] + [class*="span"] {
+	margin-left: 10px;
+	margin-right: 10px;
+    }
+    input.span3,
+    textarea.span3,
+    .uneditable-input.span3 {
+	width: 166px;
+    }
+}

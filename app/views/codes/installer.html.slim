@@ -1,0 +1,30 @@
+# !/usr/bin/env ruby
+require 'fileutils'
+
+data = DATA.read
+file_list = data.split(/^(@@.*?)$\n/m)
+meta_description = file_list.shift
+
+puts '*done downloading*'
+puts '*install following files*'
+puts '----------------------------'
+
+iterator = (0...file_list.size/2).map{|x| x * 2 }
+for i in iterator
+  path = file_list[i].sub('@@','')
+  puts "+ #{path}"
+  FileUtils.mkdir_p(File.dirname(path))
+  File.open(path, 'w') do |f|
+    f.puts file_list[i+1]
+  end
+end
+
+puts '----------------------------'
+puts '*done installing*'
+
+__END__
+<%=@description%>
+<% @templates.each do |template|%>
+@@<%=template.install_path%>
+<%== template.rendered_body %>
+<% end %>

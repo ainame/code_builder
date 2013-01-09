@@ -1,0 +1,15 @@
+.span12
+  div class="page-header"
+    h1 Templates
+  table class="table table-striped"
+    thead
+      tr
+        th id
+        th name
+        th body
+    tbody
+      - @templates.each do |template|
+        tr
+          td== link_to template.access_token, url_for(:templates, :show, :access_token => template.access_token)
+          td= template.name
+          td= template.body

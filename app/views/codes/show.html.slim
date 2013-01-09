@@ -1,0 +1,27 @@
+.row
+  .span5
+    == partial "codes/form"
+  .span7
+    / p Install command
+    / #command
+    /   pre
+    /     - if @builder_enviroment
+    /       = install_command(@builder_enviroment.access_token)
+    /     - else
+    /       | install command
+    p Download
+    #command
+      pre
+        - unless @builder_enviroment.access_token.blank?
+          = download_command(@builder_enviroment.access_token)
+        - else
+          | download command
+    #preview
+      - if @code
+        - @code.templates.each do |template|
+          p Template
+          pre class="brush: perl"
+            = template.raw_body
+          p Preview Codes
+          pre class="brush: perl"
+            = template.rendered_body
