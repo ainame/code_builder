@@ -3,7 +3,7 @@ require 'dogen/enviroment/pluggable'
 require 'dogen/enviroment/plugins_loader'
 
 # TODO: 現在のEnviromentクラスをFactoryクラスにし、
-#       環境の実体を切り出す
+#       環境の実体をBasicObjectを継承したclassに切り出す
 class Dogen
   class Enviroment
     def initialize(init_params = {})
