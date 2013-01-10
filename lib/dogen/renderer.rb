@@ -13,7 +13,8 @@ class Dogen::Renderer
 
   private
   def render_erb
-    tmp = ERB.new(@template.raw_body).result(@binding)
+    # safe_level = 4, trim_mode = 1
+    tmp = ERB.new(@template.raw_body, 4, 1).result(@binding)
     @template.rendered_body = tmp
   end
 end
