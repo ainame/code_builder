@@ -61,7 +61,7 @@ class Dogen
 
     include Pluggable
     %w{
-      namespace schema resource common_helper author class_name
+      namespace schema resource common_helper author class_name hiveql
     }.each do |plugin_name|
       PluginsLoader.perform(plugin_name)      
     end
