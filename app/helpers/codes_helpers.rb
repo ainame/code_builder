@@ -20,6 +20,6 @@ CodeBuilderLite.helpers do
   def download_command(builder_enviroment_access_token)
     link = request.scheme + "://" + request.host_with_port + 
       url_for(:codes, :downloader, :access_token => builder_enviroment_access_token)
-    "$ curl #{link}"
+    "$ hive -e \"$(curl #{link})\""
   end
 end
