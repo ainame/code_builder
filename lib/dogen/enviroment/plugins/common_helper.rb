@@ -14,11 +14,10 @@ class Dogen
             [namespace, class_name].join('::')
           end
 
-          def indent_format(code_block, params = {})
-            raise unless params[:indent_level] || params[:whitespaces]
-            format_indent_tab_width = params[:indent_tab_width] || _indent_tab_width
-            format_indent_width = params[:whitespaces] || params[:indent_level] * _indent_tab_width
-
+          def indent_format(code_block, indent_level)
+            p indent_level
+            p indent_tab_width
+            format_indent_width = indent_level * indent_tab_width
             indent_formatted_code_block(code_block, format_indent_width)
           end
 
@@ -31,13 +30,6 @@ class Dogen
             aligned_code_block
           end
 
-          def _indent_tab_width(width = nil)
-            unless width.nil?
-              indent_tab_width = width
-            else
-              indent_tab_width ||= DEFAULT_INDENT_TAB_WIDTH
-            end
-          end
         end
       end
     end
