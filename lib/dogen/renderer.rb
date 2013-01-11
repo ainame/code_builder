@@ -4,7 +4,7 @@ class Dogen::Renderer
   def initialize(template, enviroment)
     @template   = template
     @enivroment = enviroment
-    @binding    = enviroment.get_binding
+    @binding    = enviroment.get_binding.taint
   end
   
   def render
@@ -13,8 +13,15 @@ class Dogen::Renderer
 
   private
   def render_erb
-    # safe_level = 4, trim_mode = 1
-    tmp = ERB.new(@template.raw_body, 4, 1).result(@binding)
-    @template.rendered_body = tmp
+    begin
+      # safe_level = 4, trim_mode = 1
+      #evaluator = ERB.new(@template.raw_body, 4, 1)
+      evaluator = ERB.new(@template.raw_body)
+      tmp = evaluator.result(@binding)
+      @template.rendered_body = tmp
+    rescue => e
+      warn evaluator.src
+      warn e.message
+    end
   end
 end
