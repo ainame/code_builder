@@ -5,7 +5,7 @@ CodeBuilderLite.controllers :codes do
                                    sort_attrs: false if development?
 
   get :index do
-    @builder_enviroments = BuilderEnviroment.all
+    @builder_enviroments = BuilderEnviroment.latest.all
     render 'codes/index'
   end
 

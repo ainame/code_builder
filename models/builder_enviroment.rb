@@ -3,6 +3,8 @@ class BuilderEnviroment < ActiveRecord::Base
   validates_presence_of :params_json, :template_id
   before_create :set_access_token
 
+  scope :latest, order('created_at desc')
+
   private
   def set_access_token
     self.access_token = self.access_token.blank? ? generate_access_token : self.access_token
