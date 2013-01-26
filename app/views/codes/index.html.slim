@@ -5,10 +5,16 @@
     thead
       tr
         th id
+        th name
+        th tempalte name
+        th description
         th params_json
     tbody
       - @builder_enviroments.each do |builder|
         tr
           td== link_to builder.access_token, url_for(:codes, :show, :access_token => builder.access_token)
+          td= builder.name
+          td= builder.template.name
+          td= builder.description
           td= builder.params_json
 

@@ -2,10 +2,16 @@
   .buttons
     button.btn.btn-primary type="submit" 生成
     button#addTextFieldButton.btn type="button" 追加
+    - if @builder_enviroment.template
+      a href="#{url_for(:templates, :show, :access_token => @builder_enviroment.template.access_token)}" target="_blank"
+        button#addTextFieldButton.btn type="button" テンプレートを開く
   br
   .attributes
     label Template
     == f.select :template_id, :collection => @templates, :fields => [:name, :id], :class => 'span5'
+    - if @builder_enviroment.template && !@builder_enviroment.template.description.blank?
+      label Template Description
+      pre #{@builder_enviroment.template.description} 
     label Parameters
     #textFieldGroup.control-group data-variables='#{@builder_enviroment.params_json}'
       .controls.controls-row

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 2) do
+ActiveRecord::Schema.define(:version => 3) do
 
   create_table "builder_enviroments", :force => true do |t|
     t.string   "access_token", :limit => 6, :null => false
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 2) do
     t.text     "params_json"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+    t.string   "name"
+    t.text     "description"
   end
 
   add_index "builder_enviroments", ["access_token"], :name => "index_builder_enviroments_on_access_token", :unique => true
@@ -29,6 +31,7 @@ ActiveRecord::Schema.define(:version => 2) do
     t.text     "body",                      :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+    t.text     "description"
   end
 
   add_index "templates", ["access_token"], :name => "index_templates_on_access_token", :unique => true

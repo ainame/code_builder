@@ -1,8 +1,8 @@
 class Template < ActiveRecord::Base
-  attr_accessible :name, :body
+  attr_accessible :name, :body, :description
   validates_presence_of :name, :body
   before_create :set_access_token, :remove_carriage_return
-
+  has_one :builder_enviroment
   scope :latest, order('created_at desc')
 
   private

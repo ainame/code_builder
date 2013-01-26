@@ -1,7 +1,8 @@
 class BuilderEnviroment < ActiveRecord::Base
-  attr_accessible :params_json, :template_id
+  attr_accessible :params_json, :template_id, :name, :description
   validates_presence_of :params_json, :template_id
   before_create :set_access_token
+  belongs_to :template
 
   scope :latest, order('created_at desc')
 

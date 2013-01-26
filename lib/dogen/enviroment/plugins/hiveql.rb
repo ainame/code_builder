@@ -51,8 +51,7 @@ class Dogen
 
           def and_where_valid_access
             where_clause = <<EOS
-and status regexp '^2'
-and member_id <> '-'
+and status regexp '^2' and member_id <> '-'
 EOS
             where_clause
           end
