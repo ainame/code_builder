@@ -1,4 +1,4 @@
-== form_for_restful @builder_enviroment, '/codes' do |f|
+- form_for_restful @builder_enviroment, '/codes' do |f|
   .buttons
     button.btn.btn-primary type="submit" 生成
     button#addTextFieldButton.btn type="button" 追加
@@ -17,6 +17,3 @@
       .controls.controls-row
         == text_field_tag "variables[0][key]", :class => 'span2', :placeholder => 'variable name'
         == text_field_tag "variables[0][value]", :class => 'span3', :placeholder => 'value'
-
-      
-        

@@ -20,8 +20,6 @@ CodeBuilderLite.controllers :templates do
   
   post :create, :map => '/templates' do
     @template = Template.new(params[:template])
-    p @template
-
 
     if @template.save
       redirect url_for(:templates, :show, :access_token => @template.access_token)

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 3) do
+ActiveRecord::Schema.define(:version => 5) do
+
+  create_table "affiliations", :force => true do |t|
+    t.integer  "package_id",  :null => false
+    t.integer  "template_id", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "builder_enviroments", :force => true do |t|
     t.string   "access_token", :limit => 6, :null => false
@@ -24,6 +31,20 @@ ActiveRecord::Schema.define(:version => 3) do
   end
 
   add_index "builder_enviroments", ["access_token"], :name => "index_builder_enviroments_on_access_token", :unique => true
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "packages", :force => true do |t|
+    t.string   "name",        :null => false
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "templates", :force => true do |t|
     t.string   "access_token", :limit => 6, :null => false

@@ -1,0 +1,16 @@
+- form_for_restful @package, '/packages', :class => 'form-horizontal' do |f|
+  .attributes
+    h4
+      strong Package
+    == f.text_field :name, :class => 'span6', :value => @package.name, :placeholder => 'name'
+    == f.select :category_id, :collection => @categories, :fields => [:name, :id]
+  .sub_attributes
+    - f.fields_for :affiliation do |a|
+      .control-group
+        label.control-label Template
+        .controls
+          == a.select :template_id, :collection => @templates, :fields => [:name, :id], :multiple => 'multiple'
+      == a.hidden_field :name, :class => 'span6'
+  .submit
+    == f.submit nil, :class => 'btn'
+

@@ -1,0 +1,14 @@
+.span12
+  div class="page-header"
+    h1 Packages
+  table class="table table-striped"
+    thead
+      tr
+        th id
+        th name
+    tbody
+      - @packages.each do |package|
+        tr
+          td== link_to package.id, url_for(:packages, :show, :id => package.id)
+          td= package.name
+

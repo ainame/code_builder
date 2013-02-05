@@ -52,11 +52,11 @@ class Dogen
             table.each do |column, type| 
               line = ''
               case type
-              when :integer
+              when 'integer'
                 line = "=> { type => Params::Validate::SCALAR, regex => qr/\\A\\d+\\z/  },\n"
-              when :text, :varchar
+              when 'text', 'varchar'
                 line = "=> { type => Params::Validate::SCALAR },\n"
-              when :datetime
+              when 'datetime'
                 line = "=> { type => Params::Validate::SCALAR, regex => qr/\\A\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}:\\d{2}:\\d{2}\\z/ },\n"
               end
               line.prepend(formatted_column_name(column, get_longest_column_name(table)))
