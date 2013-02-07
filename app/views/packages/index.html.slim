@@ -6,9 +6,12 @@
       tr
         th id
         th name
+        th templates
     tbody
       - @packages.each do |package|
         tr
-          td== link_to package.id, url_for(:packages, :show, :id => package.id)
-          td= package.name
+          td == link_to package.id.to_s, url_for(:packages, :show, :id => package.id)
+          td == package.name
+          td == package.templates.map(&:name).join(',')
+
 

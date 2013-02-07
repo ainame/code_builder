@@ -1,6 +1,6 @@
 class Affiliation < ActiveRecord::Base
   attr_accessible :template_id, :package_id
 
-  has_one :template
-  has_one :package
+  belongs_to :template
+  belongs_to :package
 end

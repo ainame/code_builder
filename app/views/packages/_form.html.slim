@@ -4,13 +4,11 @@
       strong Package
     == f.text_field :name, :class => 'span6', :value => @package.name, :placeholder => 'name'
     == f.select :category_id, :collection => @categories, :fields => [:name, :id]
-  .sub_attributes
-    - f.fields_for :affiliation do |a|
-      .control-group
-        label.control-label Template
-        .controls
-          == a.select :template_id, :collection => @templates, :fields => [:name, :id], :multiple => 'multiple'
-      == a.hidden_field :name, :class => 'span6'
+    .control-group
+      label.control-label Template
+      .controls
+        select.package_template_ids name="package[template_ids][]" multiple="multiple"
+          == options_for_select ::Template.all.map{|t| {t.name.to_s => t.id}}, @package.templates.map(&:id)
   .submit
     == f.submit nil, :class => 'btn'
 

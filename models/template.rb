@@ -1,5 +1,6 @@
 class Template < ActiveRecord::Base
-  belongs_to :affiliations
+  has_many :affiliations, :dependent => :destroy
+  has_many :packages, :through => :affiliations
 
   attr_accessible :name, :body
   validates_presence_of :name, :body
