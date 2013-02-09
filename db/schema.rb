@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(:version => 6) do
 
   create_table "affiliations", :force => true do |t|
     t.integer  "package_id",  :null => false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 5) do
 
   create_table "builder_enviroments", :force => true do |t|
     t.string   "access_token", :limit => 6, :null => false
-    t.integer  "template_id"
+    t.integer  "package_id"
     t.text     "params_json"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
@@ -40,10 +40,11 @@ ActiveRecord::Schema.define(:version => 5) do
   end
 
   create_table "packages", :force => true do |t|
-    t.string   "name",        :null => false
-    t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "name",         :null => false
+    t.string   "access_token", :null => false
+    t.integer  "category_id",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "templates", :force => true do |t|

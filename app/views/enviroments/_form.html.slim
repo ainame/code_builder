@@ -1,0 +1,13 @@
+- form_for_restful @builder_enviroment, url_for(:enviroments, :create) do |f|
+  .buttons
+    button.btn.btn-primary type="submit" 生成
+    button#addTextFieldButton.btn type="button" 追加
+  br
+  .attributes
+    label Package
+    == f.select :package_id, :collection => @packages, :fields => [:name, :id], :class => 'span5'
+    label Parameters
+    #textFieldGroup.control-group data-variables='#{@builder_enviroment.params_json}'
+      .controls.controls-row
+        == text_field_tag "variables[0][key]", :class => 'span2', :placeholder => 'variable name'
+        == text_field_tag "variables[0][value]", :class => 'span3', :placeholder => 'value'

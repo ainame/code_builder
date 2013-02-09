@@ -32,4 +32,5 @@ gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
 # end
 group :development do
   gem 'awesome_print'
+  gem 'pry'
 end

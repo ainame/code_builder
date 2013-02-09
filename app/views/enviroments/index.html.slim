@@ -1,0 +1,14 @@
+.span12
+  div class="page-header"
+    h1 BuilderEnviroment
+  table class="table table-striped"
+    thead
+      tr
+        th id
+        th params_json
+    tbody
+      - @builder_enviroments.each do |builder|
+        tr
+          td== link_to builder.access_token, url_for(:codes, :show, :access_token => builder.access_token)
+          td= builder.params_json
+

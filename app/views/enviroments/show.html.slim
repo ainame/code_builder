@@ -1,11 +1,11 @@
 .row
   .span5
-    == partial "codes/form"
+    == partial "enviroments/form"
   .span7
     #command
       pre
         - unless @builder_enviroment.access_token.blank?
-          = consequence_command(@builder_enviroment.access_token)
+          = consequence_command(@builder_enviroment.package.category_id, @builder_enviroment.access_token)
         - else
           |　
     #preview

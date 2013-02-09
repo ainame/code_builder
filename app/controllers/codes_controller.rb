@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
 require 'json'
 
+#
+# 捨てる
+#
 CodeBuilderLite.controllers :codes do
   Slim::Engine.set_default_options pretty: true,
                                    sort_attrs: false if development?
