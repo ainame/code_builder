@@ -1,15 +1,20 @@
 - form_for_restful @package, url_for(:integrations, :create) do |f|
-  .attributes
-    h4 Category
-    == f.text_field :category_name, :value => @category.name, :disabled => true
-    == f.hidden_field :category_id, :value => @category.id
-    label Package name
-    == f.text_field :name, :class => 'span6', :value => @package.name, :placeholder => 'package name'
-    br
-    label Template
-    - f.fields_for :templates do |t|
-      == t.text_field :name, :class => 'span6', :placeholder => "template name"
-      br
-      == t.text_area  :body, :class => 'span6', :rows => 10
-  .submit
-    == f.submit nil, :class => 'btn'
+  .row
+    .span6.baseAttributes
+      .fixed
+        h4 Category
+        == f.text_field :category_name, :value => @package.category.name, :disabled => true
+        == f.hidden_field :category_id, :value => @package.category.id
+        label Package name
+        == f.text_field :name, :class => 'span6', :value => @package.name, :placeholder => 'package name'
+        .submit
+          == f.submit nil, :class => 'btn'
+          button#addTemplateFieldButton.btn type="button" Add Template
+
+    .span6
+      label Template
+      #templateFieldGroup
+        - f.fields_for :templates do |t|
+          == t.text_field :name, :class => 'span6', :placeholder => "template name"
+          br
+          == t.text_area  :body, :class => 'span6', :rows => 10

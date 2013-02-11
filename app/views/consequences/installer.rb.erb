@@ -26,5 +26,5 @@ __END__
 <%=@description%>
 <% @templates.each do |template|%>
 @@<%=template.install_path%>
-<%== template.rendered_body %>
+<%= template.rendered_body %>
 <% end %>

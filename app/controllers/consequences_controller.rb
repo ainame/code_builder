@@ -7,9 +7,10 @@ CodeBuilderLite.controllers :consequences do
     ).first
 
     codes = Code.new(builder_enviroment)
+    @description = ''
     @templates = codes.templates
 
-    render 'enviroments/installer', :layout => false
+    render 'consequences/installer', :layout => false
   end
 
   get :downloader, :map => '/d/:access_token' do
@@ -20,6 +21,6 @@ CodeBuilderLite.controllers :consequences do
     codes = Code.new(builder_enviroment)
     @templates = codes.templates
 
-    render 'enviroments/downloader', :layout => false
+    render 'consequences/downloader', :layout => false
   end
 end

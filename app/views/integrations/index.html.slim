@@ -1,0 +1,19 @@
+.span12
+  div class="page-header"
+    h1 Packages
+  table class="table table-striped"
+    thead
+      tr
+        th id
+        th category
+        th name
+        th templates
+    tbody
+      - @packages.each do |package|
+        tr
+          td == link_to package.access_token.to_s, url_for(:integrations, :show, :access_token => package.access_token)
+          td == package.category.name
+          td == package.name
+          td == package.templates.map(&:name).join(',')
+
+

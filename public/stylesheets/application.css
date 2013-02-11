@@ -25,3 +25,8 @@ body {
 	width: 166px;
     }
 }
+
+.baseAttributes .fixed {
+    position: fixed;
+    top: 60px;
+}
