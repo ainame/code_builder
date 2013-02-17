@@ -10,7 +10,6 @@ class FieldSet
     @_removeButtonTag.appendTo(@body)
   _detachRemoveButton: ->
     @_removeButtonTag.remove()
-  
 
 class NumberingListManager
   constructor: (@elementClass, @renderPoint)->
@@ -49,7 +48,7 @@ class TextFieldSet extends FieldSet
     @_inputTagForKey.attr "value", params["key"] if params["key"]
     @_inputTagForValue.attr "value", params["value"] if params["value"]
     @_wrapperDivTag= $("<div class=\"controls controls-row\" />")
-    @_removeButtonTag = $("<button type=\"button\" class=\"btn removeTextFeildSetButton\">消</button><br />")
+    @_removeButtonTag = $("<button type=\"button\" class=\"btn removeTextFeildSetButton\">delete</button><br />")
     @body = $(@_makeBody(listLength))
   reNumbering: (@number, listLength)->
     @_modifyRemoveButton(listLength)
@@ -62,10 +61,10 @@ class TextFieldSet extends FieldSet
 
 class TemplateFieldSet extends FieldSet
   constructor: (@number, listLength, params)->
-    @_inputTag = $("<input class=\"span6\" placeholder=\"template name\" type=\"text\" />")
+    @_inputTag = $("<input class=\"span5\" placeholder=\"template name\" type=\"text\" />")
     @_textAreaTag = $("<textarea class=\"span6\" rows=\"10\"></textarea>")
-    @_wrapperDivTag= $("<div class=\"controls controls-row\" />")
-    @_removeButtonTag = $("<button type=\"button\" class=\"btn removeTemplateFeildSetButton\">remove</button><br />")
+    @_wrapperDivTag = $("<div class=\"controls controls-row\" />")
+    @_removeButtonTag = $("<button type=\"button\" class=\"btn removeTemplateFeildSetButton span1\">remove</button>")
     @body = $(@_makeBody(listLength))
   reNumbering: (@number, listLength)->
     @_modifyRemoveButton(listLength)
@@ -74,8 +73,9 @@ class TemplateFieldSet extends FieldSet
   _makeBody: (listLength)->
     @_modifyRemoveButton(listLength)
     @reNumbering(@number, listLength)
-    # @_wrapByDivTag(@_inputTag.add($("<br />")).add(@_textAreaTag).add(@_removeButtonTag))
-    @_wrapByDivTag(@_textAreaTag.add(@_removeButtonTag))
+    @_wrapByDivTag(@_inputTag.add(@_removeButtonTag).add($("<br />")).add(@_textAreaTag))
+  _attachRemoveButton: ->
+    @_removeButtonTag.insertAfter(@body.children().first())
 
 $ ->
   textFieldGroup = new NumberingListManager(TextFieldSet, $("#textFieldGroup"))
