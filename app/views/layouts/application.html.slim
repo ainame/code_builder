@@ -2,8 +2,8 @@ doctype html
 html
   head
     title CodeBuilder
-    == stylesheet_link_tag "bootstrap", "bootstrap-responsive", "application"
-    == javascript_include_tag "jquery", "jquery-ujs", "bootstrap.min", "application"
+    == stylesheet_link_tag "bootstrap", "bootstrap-responsive", "application", "syntaxhighlighter_3.0.83/styles/shThemeDefault.css", "syntaxhighlighter_3.0.83/styles/shCore.css"
+    == javascript_include_tag "jquery", "jquery-ujs", "bootstrap.min", "application", "syntaxhighlighter_3.0.83/scripts/shCore.js", "syntaxhighlighter_3.0.83/scripts/shBrushPerl.js",
   body
     .navbar.navbar-fixed-top.navbar-inverse
       .navbar-inner
@@ -13,16 +13,16 @@ html
             li.active
               a href="/" Home
             li
-              a href="/p/new" New Package
+              a href="/p/new" Add Package
             li
-              a href="/p" Packages
+              a href="/e/new" Use
             li
-              a href="/e/new" New enviroment
-            li
-              a href="/e" Enviroments
+              a href="/e" History
     .container
       .content
         .row
           .span12
         .row
           == yield
+    javascript:
+      SyntaxHighlighter.all()
