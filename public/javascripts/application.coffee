@@ -15,8 +15,8 @@ class NumberingListManager
   constructor: (@elementClass, @renderPoint)->
     @elementList = []
   appendElement: (params = {})->
-    textField = @_getNextElement(params)
-    @elementList.push textField
+    nextField = @_getNextElement(params)
+    @elementList.push nextField
     @_reNumberingAllElement()
     @_renderTo()
   removeElementAt: (element)->
@@ -48,7 +48,7 @@ class TextFieldSet extends FieldSet
     @_inputTagForKey.attr "value", params["key"] if params["key"]
     @_inputTagForValue.attr "value", params["value"] if params["value"]
     @_wrapperDivTag= $("<div class=\"controls controls-row\" />")
-    @_removeButtonTag = $("<button type=\"button\" class=\"btn removeTextFeildSetButton\">delete</button><br />")
+    @_removeButtonTag = $("<button type=\"button\" class=\"btn removeTextFeildSetButton btn-small\">del</button>")
     @body = $(@_makeBody(listLength))
   reNumbering: (@number, listLength)->
     @_modifyRemoveButton(listLength)
@@ -62,18 +62,23 @@ class TextFieldSet extends FieldSet
 class TemplateFieldSet extends FieldSet
   constructor: (@number, listLength, params)->
     @_inputTag = $("<input class=\"span5\" placeholder=\"template name\" type=\"text\" />")
+    @_hiddenIdTag = $("<input type=\"hidden\" />")
     @_textAreaTag = $("<textarea class=\"span6\" rows=\"10\"></textarea>")
     @_wrapperDivTag = $("<div class=\"controls controls-row\" />")
     @_removeButtonTag = $("<button type=\"button\" class=\"btn removeTemplateFeildSetButton span1\">remove</button>")
+    @_hiddenIdTag.attr "value", params["id"] if params["id"]
+    @_inputTag.attr "value", params["name"] if params["name"]
+    @_textAreaTag.attr "value", params["body"] if params["body"]
     @body = $(@_makeBody(listLength))
   reNumbering: (@number, listLength)->
     @_modifyRemoveButton(listLength)
+    @_hiddenIdTag.attr "name", "package[templates_attributes][#{@number}][id]"
     @_inputTag.attr "name", "package[templates_attributes][#{@number}][name]"
     @_textAreaTag.attr "name", "package[templates_attributes][#{@number}][body]"
   _makeBody: (listLength)->
     @_modifyRemoveButton(listLength)
     @reNumbering(@number, listLength)
-    @_wrapByDivTag(@_inputTag.add(@_removeButtonTag).add($("<br />")).add(@_textAreaTag))
+    @_wrapByDivTag(@_inputTag.add(@_removeButtonTag).add($("<br />")).add(@_textAreaTag).add(@_hiddenIdTag))
   _attachRemoveButton: ->
     @_removeButtonTag.insertAfter(@body.children().first())
 
@@ -95,4 +100,9 @@ $ ->
     templateFieldGroup.appendElement()
   $(".removeTemplateFeildSetButton").live 'click', (event)->
     templateFieldGroup.removeElementAt($(event.currentTarget).parent())
-  templateFieldGroup.appendElement()
+  templates_json = $("#templateFieldGroup").data("templates")
+
+  if templates_json?
+    templateFieldGroup.appendElement({id: json["id"], name: json["name"], body: json["body"]}) for json in templates_json
+  else
+    templateFieldGroup.appendElement()

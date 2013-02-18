@@ -21,7 +21,8 @@ CodeBuilderLite.controllers :integrations do
   end
 
   get :index, :map => '/p' do
-    @packages = Package.latest.all
+    @categories = Category.all
+    @packages   = Package.latest.all
     render 'integrations/index'
   end
 
@@ -31,13 +32,23 @@ CodeBuilderLite.controllers :integrations do
   end
 
   post :create, :map => '/p' do
-    ap params
     @package = Package.new(params[:package])
 
     if @package.save
-      redirect url_for(:integrations, :index)
+      redirect url_for(:integrations, :show, :access_token => @package.access_token)
     else
-      redirect url_for(:integrations, :index)
+      redirect url_for(:integrations, :new)
+    end
+  end
+
+  put :update, :map => '/p', :with => :id do
+    p params
+    @package = Package.find(params[:id])
+
+    if @package.update_attributes(params[:package])
+      redirect url_for(:integrations, :show, :access_token => @package.access_token)
+    else
+      redirect url_for(:integrations, :show, :access_token => @package.access_token)
     end
   end
 

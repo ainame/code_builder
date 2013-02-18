@@ -3,7 +3,7 @@ require_relative 'active_record/act_as_random_id'
 class Template < ActiveRecord::Base
   include ActiveRecord::ActAsRandomId
 
-  has_many :affiliations, :dependent => :destroy
+  has_one  :affiliations, :dependent => :destroy
   has_many :packages, :through => :affiliations
   has_many :categories, :through => :packages
 

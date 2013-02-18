@@ -13,8 +13,17 @@
 
     .span6
       label Template
-      #templateFieldGroup
-        - f.fields_for :templates do |t|
-          == t.text_field :name, :class => 'span6', :placeholder => "template name"
-          br
-          == t.text_area  :body, :class => 'span6', :rows => 10
+      #templateFieldGroup data-templates="#{@package.templates.to_json}"
+        - unless @package.have_persisted_templates?
+          - f.fields_for :templates do |t|
+            .controls.controls-row
+              == t.text_field :name, :class => 'span6', :placeholder => "template name"
+              br
+              == t.text_area  :body, :class => 'span6', :rows => 10
+        - else
+          - @package.templates.each do |tmpl|
+            .controls.controls-row
+              == hidden_field_tag :id, :class => 'span6', :value => tmpl.id
+              == text_field_tag :name, :class => 'span6', :value => tmpl.name
+              br
+              == text_area_tag :body, :class => 'span6', :rows => 10, :value => tmpl.body
