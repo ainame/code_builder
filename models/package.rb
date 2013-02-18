@@ -12,7 +12,7 @@ class Package < ActiveRecord::Base
   accepts_nested_attributes_for :templates, :allow_destroy => true
 
   def category
-    @category ||= Category.new(self.category_id)
+    @category ||= Category.get_instance(self.category_id)
   end
 
   def have_persisted_templates?

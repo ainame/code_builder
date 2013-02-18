@@ -10,17 +10,14 @@ class Category
     '4' => 'Jira',
   }.freeze
 
-  def initialize(category_id)
-    if TYPES.keys.include?(category_id.to_s)
-      @id   = category_id.to_s
-      @name = TYPES[category_id.to_s]
-    else
-      raise
-    end
+  INSTANCES = {}
+
+  def self.get_instance(category_id)
+    INSTANCES[category_id.to_s]
   end
 
   def self.all
-    @instances ||= TYPES.map do |k,v| ::Category.new(k) end   
+    INSTANCES.values
   end
 
   def persisted?
@@ -30,4 +27,24 @@ class Category
   def command_format
     Category::ConsequenceCommand.get_format(@name)
   end
+
+  private
+  def self.create_instance(category_id)
+    category = Category.new
+    category.instance_eval do
+      if TYPES.keys.include?(category_id.to_s)
+        @id   = category_id.to_s
+        @name = TYPES[category_id.to_s]
+      else
+        raise
+      end
+    end
+
+    category
+  end  
+
+  INSTANCES = TYPES.map do |key, name|
+    { key => self.create_instance(key) }
+  end.inject({}){|hash, elem| hash.merge(elem)}.freeze
+
 end
