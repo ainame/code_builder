@@ -11,13 +11,21 @@ CodeBuilderLite.controllers :enviroments do
 
   get :new, :map => '/e/new' do
     @builder_enviroment = BuilderEnviroment.new
-    @packages = Package.latest.all
+    unless params[:mode] == "detail"
+      @packages = Package.latest.all.group_by{|pa| pa.category }
+    else
+      @package = @builder_enviroment.package ||
+        Package.find(params[:package_id])
+    end
+
     render 'enviroments/show'
   end
 
   get :show, :map => '/e/:access_token' do
     @builder_enviroment =
       BuilderEnviroment.where(:access_token => params[:access_token]).first_or_initialize
+    @package = @builder_enviroment.package ||
+      Package.find(params[:package_id])
     @packages = Package.latest.all
     @code = Code.new(@builder_enviroment) if @builder_enviroment
 

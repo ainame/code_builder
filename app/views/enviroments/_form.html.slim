@@ -1,13 +1,17 @@
 - form_for_restful @builder_enviroment, url_for(:enviroments, :create) do |f|
-  .buttons
-    button.btn.btn-primary type="submit" create
-    button#addTextFieldButton.btn type="button" add value
-  br
-  .attributes
-    label Package
-    == f.select :package_id, :collection => @packages, :fields => [:name, :id], :class => 'span5'
-    label Parameters
-    #textFieldGroup.control-group data-variables='#{@builder_enviroment.params_json}'
-      .controls.controls-row
-        == text_field_tag "variables[0][key]", :class => 'span2', :placeholder => 'variable name'
-        == text_field_tag "variables[0][value]", :class => 'span3', :placeholder => 'value'
+  - if @builder_enviroment.package_id or params[:mode] == "detail"
+    .buttons
+      button.btn.btn-primary type="submit" create
+      button#addTextFieldButton.btn type="button" add value
+      br
+    .attributes
+      label Package
+      input type="text" value="#{@package.name}" class="span5" disabled="disabled"
+      == f.hidden_field :package_id, :value => @package.id
+      label Parameters
+      #textFieldGroup.control-group data-variables='#{@builder_enviroment.params_json}'
+        .controls.controls-row
+          == text_field_tag "variables[0][key]", :class => 'span2', :placeholder => 'variable name'
+          == text_field_tag "variables[0][value]", :class => 'span3', :placeholder => 'value'
+  - else
+    == partial "enviroments/package_list"

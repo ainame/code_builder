@@ -12,6 +12,6 @@ CodeBuilderLite.helpers do
   def consequence_command(category_id, enviroment_access_token)
     path = url_for(:consequences, :installer, :access_token => enviroment_access_token)
     link = request.scheme + "://" + request.host_with_port + path
-    Category.new(category_id).command_format % link
+    Category.get_instance(category_id).command_format % link
   end
 end

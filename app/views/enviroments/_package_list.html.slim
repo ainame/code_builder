@@ -1,0 +1,8 @@
+ul
+  - @packages.each do |category, packages_by_category|
+    li= category.name
+    ul
+      - packages_by_category.each do |pack|
+        = link_to url_for(:enviroments, :new, :mode => 'detail', :package_id => pack.id) do
+          li= pack.name
+        

@@ -26,7 +26,7 @@ class Category
 
     module Mailto
       def self.format
-        "<a href=\"mailto:%s?%s\">execute mailer</a>"
+        "<a href=\"mailto:%s\">execute mailer</a>"
       end
     end
 

@@ -8,7 +8,7 @@
         label Package name
         == f.text_field :name, :class => 'span6', :value => @package.name, :placeholder => 'package name'
         .submit
-          == f.submit nil, :class => 'btn'
+          == f.submit nil, :class => 'btn', :value => "submit"
           button#addTemplateFieldButton.btn type="button" Add Template
 
     .span6

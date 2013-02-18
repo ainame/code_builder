@@ -6,6 +6,12 @@ CodeBuilderLite.controllers :integrations do
     render "integrations/select_category"
   end
 
+  get :index, :map => '/p' do
+    @categories = Category.all
+    @packages   = Package.latest.all
+    render 'integrations/index'
+  end
+
   get :new, :map => '/p/new' do
     @categories = Category.all
     @templates  = Template.all
@@ -15,15 +21,9 @@ CodeBuilderLite.controllers :integrations do
     if params[:mode].blank?
       render "integrations/select_category"
     elsif params[:mode] == 'package'
-      @package.category = Category.new(params[:category_id])
+      @package.category = Category.get_instance(params[:category_id])
       render 'integrations/new'
     end
-  end
-
-  get :index, :map => '/p' do
-    @categories = Category.all
-    @packages   = Package.latest.all
-    render 'integrations/index'
   end
 
   get :show, :map => '/p/:access_token' do
@@ -42,7 +42,6 @@ CodeBuilderLite.controllers :integrations do
   end
 
   put :update, :map => '/p', :with => :id do
-    p params
     @package = Package.find(params[:id])
 
     if @package.update_attributes(params[:package])
