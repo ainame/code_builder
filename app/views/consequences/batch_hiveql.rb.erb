@@ -1,0 +1,36 @@
+# !/usr/bin/env ruby
+require 'fileutils'
+
+data = DATA.read
+data_list = data.split(/^(@@.*?)$\n/m)
+meta_description = data_list.shift
+def data_list.each_data_and_name
+  iterator = (0...(self.size/2)).map{|x| x * 2 }
+  for i in iterator
+    name = self[i].sub('@@','')
+    data = self[i+1]
+    yield data, name
+  end
+end
+
+def execute_hiveql(query, log_file)
+  command = "hive -e \"#{query}\" > #{log_file}"
+  system command
+end
+
+puts '*batch query start*'
+puts '----------------------------'
+
+data_list.each_data_and_name do |query, log_file|
+  execute_hiveql(query, log_file)
+end
+
+puts '----------------------------'
+puts '*batch query end*'
+
+__END__
+<%=@description%>
+<% @templates.each do |template|%>
+@@<%= template.name %>
+<%= template.rendered_body + "\n"%>
+<% end %>

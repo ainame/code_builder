@@ -6,19 +6,18 @@ class Dogen
   class Template
     include LocalFileLoader
 
-    attr_reader :extname, :raw_body, :template_path
-    attr_accessor :rendered_body, :install_path, :custom_fields
+    attr_reader :raw_body, :template_path
+    attr_accessor :rendered_body, :name, :custom_fields
 
     class NotFoundTemplateError < StandardError; end
     def initialize(params = {})
       raise NotFoundTemplateError unless params[:raw_body]
 
+      @name          = params[:name] || ''
       @raw_body      = params[:raw_body]
       @rendered_body = params[:rendered_body] || nil
       @custom_fields = get_custom_fields(params[:raw_body])
       @template_path = params[:template_path]
-      @extname       = File.extname(params[:template_path])
-      @install_path  = nil
     end
 
     def set_install_path(template_path = @template_path)

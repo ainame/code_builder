@@ -27,6 +27,8 @@ CodeBuilderLite.controllers :enviroments do
     @package = @builder_enviroment.package ||
       Package.find(params[:package_id])
     @packages = Package.latest.all
+    @category_name = @builder_enviroment.package.category.name.downcase || "perl"
+    @category_name = "sql" if @category_name == "hive"
     @code = Code.new(@builder_enviroment) if @builder_enviroment
 
     render 'enviroments/show'

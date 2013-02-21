@@ -20,7 +20,7 @@ class Category
 
     module Hive
       def self.format
-        "$ hive -e \"$(curl %s)\""
+        "$ curl %s | ruby"
       end    
     end
 

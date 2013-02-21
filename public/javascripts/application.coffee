@@ -90,7 +90,7 @@ $ ->
     textFieldGroup.removeElementAt($(event.currentTarget).parent())
 
   params_json = $("#textFieldGroup").data("variables")
-  if params_json?
+  if params_json? && !(params_json.length == 0)
     textFieldGroup.appendElement({key: key, value: value}) for key, value of params_json
   else
     textFieldGroup.appendElement()
@@ -100,9 +100,9 @@ $ ->
     templateFieldGroup.appendElement()
   $(".removeTemplateFeildSetButton").live 'click', (event)->
     templateFieldGroup.removeElementAt($(event.currentTarget).parent())
-  templates_json = $("#templateFieldGroup").data("templates")
 
-  if templates_json?
+  templates_json = $("#templateFieldGroup").data("templates")
+  if templates_json? && !(templates_json.length ==0)
     templateFieldGroup.appendElement({id: json["id"], name: json["name"], body: json["body"]}) for json in templates_json
   else
     templateFieldGroup.appendElement()

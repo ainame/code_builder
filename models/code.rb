@@ -10,9 +10,10 @@ class Code
       env = Dogen::Enviroment.new(env_params)
       builder = Dogen::Builder.new(env)
       builder_enviroment.package.templates.each do |tmpl|
+        p tmpl.name
         builder.add_template Dogen::Template.new(
-          :raw_body      => tmpl.body,
-          :template_path => tmpl.name,
+          :raw_body => tmpl.body,
+          :name     => tmpl.name,
         )
       end
       dogen = Dogen.new(builder)
@@ -22,7 +23,7 @@ class Code
       @templates = [Dogen::Template.new(
           :raw_body => '',
           :rendered_body => '',
-          :template_path => '',
+          :name => '',
       )]
     end
   end

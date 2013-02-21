@@ -11,9 +11,9 @@
     #preview
       - if @code
         - @code.templates.each do |template|
-          p Template(#{template.template_path})
-          pre class="brush: perl"
+          p Template(#{template.name})
+          pre class="brush: #{@category_name}"
             = template.raw_body
-          p Preview Codese(#{template.template_path})
-          pre class="brush: perl"
+          p Preview Code(#{template.name})
+            pre class="brush: #{@category_name}"
             = template.rendered_body

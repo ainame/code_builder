@@ -3,6 +3,7 @@
     .buttons
       button.btn.btn-primary type="submit" create
       button#addTextFieldButton.btn type="button" add value
+      a.btn href="#{url_for(:integrations, :show, @package.access_token)}" edit package
       br
     .attributes
       label Package

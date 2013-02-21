@@ -10,8 +10,9 @@ CodeBuilderLite.helpers do
   end
 
   def consequence_command(category_id, enviroment_access_token)
-    path = url_for(:consequences, :installer, :access_token => enviroment_access_token)
+    category = Category.get_instance(category_id)
+    path = url_for(:consequences, category.name.downcase.to_sym, :access_token => enviroment_access_token)
     link = request.scheme + "://" + request.host_with_port + path
-    Category.get_instance(category_id).command_format % link
+    category.command_format % link
   end
 end
